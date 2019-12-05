@@ -1,8 +1,24 @@
 from flask import Blueprint, jsonify, request
 from models import Footballer, db
 
+index = Blueprint('index', __name__, url_prefix='/')
 api = Blueprint('api', __name__, url_prefix='/api')
 
+@index.route('/')
+@index.route('/index')
+def get_index():
+    return '''
+            <html>
+                <title>
+                    Players Database
+                </title>
+                <body>
+                    <h1>Api</h1>
+                    <a href="./api/players">Players</a>
+                </body>
+            </html>
+    
+    '''
 
 @api.route('/players')
 def get_players():
