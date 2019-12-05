@@ -4,6 +4,7 @@ from models import db, Footballer, Club
 from routes import api, index
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 app.register_blueprint(api)
 app.register_blueprint(index)
 db.init_app(app)
