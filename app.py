@@ -1,6 +1,6 @@
 from flask import Flask
 
-from models import db, Footballer, Health
+from models import db, Footballer, Club
 from routes import api, index
 
 app = Flask(__name__)
@@ -10,13 +10,13 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-    health = Health(name='well')
-    injury = Health(name='injured')
-    db.session.add(health)
-    db.session.add(injury)
+    barcelona = Club(name='Barcelona')
+    juventus = Club(name='Juventus')
+    db.session.add(barcelona)
+    db.session.add(juventus)
     db.session.commit()
-    db.session.add(Footballer(name='Lionel', surname='Messi', club='Barcelona', health_id=injury.id))
-    db.session.add(Footballer(name='Cristiano', surname='Ronaldo', club='Juventus', health_id=health.id))
+    db.session.add(Footballer(name='Lionel', surname='Messi', club_id=barcelona.id))
+    db.session.add(Footballer(name='Cristiano', surname='Ronaldo', club_id=juventus.id))
     db.session.commit()
 
 if __name__ == '__main__':

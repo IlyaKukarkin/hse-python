@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import Footballer, db, Health
+from models import Footballer, db, Club
 
 index = Blueprint('index', __name__, url_prefix='/')
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -35,26 +35,25 @@ def get_player(id):
 def put_player():
     name = request.args.get('name')
     surname = request.args.get('surname')
-    club = request.args.get('club')
-    health_id = request.args.get('health_id')
-    player = Footballer(name=name, surname=surname, club=club, health_id=health_id)
+    club_id = request.args.get('club_id')
+    player = Footballer(name=name, surname=surname, club_id=club_id)
     db.session.add(player)
     db.session.commit()
     return jsonify(player.json())
 
-@api.route('/healths')
-def get_healths():
-    return jsonify([(lambda health: health.json())(health) for health in Health.query.all()])
+@api.route('/clubs')
+def get_clubs():
+    return jsonify([(lambda club: club.json())(club) for club in Club.query.all()])
 
-@api.route('/health/<int:id>')
-def get_health(id):
-    health = Health.query.get(id)
-    return health.json() if health else 'Health not found'
+@api.route('/club/<int:id>')
+def get_club(id):
+    club = Club.query.get(id)
+    return club.json() if club else 'Health not found'
 
-@api.route('/health/add')
-def put_health():
+@api.route('/club/add')
+def put_club():
     name = request.args.get('name')
-    health = Health(name=name)
-    db.session.add(health)
+    club = Club(name=name)
+    db.session.add(club)
     db.session.commit()
-    return jsonify(health.json())
+    return jsonify(club.json())
