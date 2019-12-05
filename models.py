@@ -17,7 +17,7 @@ class Footballer(db.Model):
     health = relationship('Health')
 
     def json(self):
-        return {"id": self.id, "name": self.name, "surname": self.surname, "club": self.club, "health": self.health.json()}
+        return {"id": self.id, "name": self.name, "surname": self.surname, "club": self.club, "health": self.health.jsonName()}
 
 
 class Health(db.Model):
@@ -27,3 +27,6 @@ class Health(db.Model):
 
     def json(self):
         return {"id": self.id, "name": self.name}
+
+    def jsonName(self):
+        return self.name
