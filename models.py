@@ -13,7 +13,7 @@ class Footballer(db.Model):
     club = relationship('Club')
 
     def json(self):
-        return {"id": self.id, "name": self.name, "surname": self.surname, "club": self.club, "club": self.club.jsonName()}
+        return {"id": self.id, "name": self.name, "surname": self.surname, "club": self.club.jsonName()}
 
 
 class Club(db.Model):
