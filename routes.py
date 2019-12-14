@@ -36,10 +36,14 @@ def put_player():
     name = request.args.get('name')
     surname = request.args.get('surname')
     club_id = request.args.get('club_id')
-    player = Footballer(name=name, surname=surname, club_id=club_id)
-    db.session.add(player)
-    db.session.commit()
-    return jsonify(player.json())
+    club = Club.query.get(club_id)
+    if club is None:
+        return 'Error: club with that ID doesn`t exist'
+    else:
+        player = Footballer(name=name, surname=surname, club_id=club_id)
+        db.session.add(player)
+        db.session.commit()
+        return jsonify(player.json())
 
 @api.route('/clubs')
 def get_clubs():
