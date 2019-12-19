@@ -16,6 +16,7 @@ def get_index():
                 <body>
                     <h1>Api</h1>
                     <a href="./api/players">Players</a>
+                    <a href="./api/clubs">Clubs</a>
                 </body>
             </html>
     
